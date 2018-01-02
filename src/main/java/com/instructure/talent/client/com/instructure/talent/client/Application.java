@@ -1,3 +1,5 @@
+package com.instructure.talent.client;
+
 import com.instructure.talent.client.UserClient;
 
 public class Application {

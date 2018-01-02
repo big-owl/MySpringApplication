@@ -13,18 +13,19 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
 //apply plugin: 'org.springframework.boot'
 
 ext {
-    springVersion = '4.3.0.RELEASE'
-    tomcatVersion = '8.5.24'
+  springVersion = '4.3.13.RELEASE'
+  tomcatVersion = '8.5.24'
 }
 
 //sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
@@ -35,6 +36,7 @@ dependencies {
     compile("org.springframework:spring-web:${springVersion}")
     compile("org.springframework:spring-webmvc:${springVersion}")
     compile("javax.servlet:javax.servlet-api:3.1.0")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
@@ -42,6 +44,7 @@ dependencies {
 tomcat {
     httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+    contextPath  = 'sample-app'
 }
 
-mainClassName = 'Application'
+mainClassName = 'com.instructure.talent.Application'
