@@ -1,13 +1,11 @@
 package com.instructure.talent.service;
 
-import org.springframework.stereotype.Service;
+import com.instructure.talent.user.UserDto;
 
-//@Service
-//@RestController
 public class UserService {
+  UserDto userDto = new UserDto();
 
-  public void getUserData()
-  {
-    System.out.println("Hello World");
+  public String getName() {
+    return userDto.getName();
   }
 }

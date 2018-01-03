@@ -10,19 +10,16 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
   // that will be common to each servlet.
   @Override
   protected Class[] getRootConfigClasses() {
-    System.out.println("inside getRootConfigClasses");
     return new Class[] { RootConfig.class };
   }
 
   @Override
   protected Class[] getServletConfigClasses() {
-    System.out.println("inside getServletConfigClasses");
     return new Class[] { WebConfig.class };
   }
 
   @Override
   protected String[] getServletMappings() {
-    System.out.println("inside getServletMappings");
     return new String[] { "/" };
   }
 
