@@ -7,11 +7,34 @@ public class UserDto implements Serializable {
 
   private String name = "Allen";    // default value
 
+  // returns the default user id
   public long getId() {
     return id;
   }
 
+  // returns the default user name
   public String getName() {
     return name;
+  }
+
+  // returns the user name if the provided id equals the default user id.
+  public String getName(long id) {
+    if (this.id == id) {
+      return name;
+    }
+    else {
+      return "unknown";
+    }
+  }
+
+  // Updates the default user name if the provided id equals the default user id.
+  public boolean setName(long id, String name) {
+    if (this.id == id) {
+      this.name = name;
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
