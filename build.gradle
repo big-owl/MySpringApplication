@@ -27,6 +27,9 @@ dependencies {
     compile("org.springframework:spring-webmvc:${springVersion}")
     compile("javax.servlet:javax.servlet-api:3.1.0")
     compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
+
+    testCompile 'junit:junit:4.12'
+
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }

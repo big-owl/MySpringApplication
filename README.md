@@ -1,8 +1,8 @@
 # MySpringApplication
 
 ## Description
-This project is my attempt to develop a simple web application with a backend service 
-using Spring 4, Java 8, RestTemplate, Gradle, and Tomcat.  
+This project is my attempt to develop a simple web application with a "backend service" 
+using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.  
 
 ## Getting Started
 1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
