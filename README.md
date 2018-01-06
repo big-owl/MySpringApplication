@@ -11,6 +11,7 @@ browser, or run 'Application.main()' from your IDE.
 
 ## Next Steps
 - Migrate application to Java 9.
+- Add an in-memory database, like H2.
 
 ## Known Issues
 - I wanted to develop this application using Spring Annotation Configuration (no xml configuration), but the
