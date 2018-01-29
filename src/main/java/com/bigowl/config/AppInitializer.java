@@ -1,7 +1,7 @@
-package com.instructure.talent.config;
+package com.bigowl.config;
 
-import com.instructure.talent.service.RootConfig;
-import com.instructure.talent.web.WebConfig;
+import com.bigowl.service.RootConfig;
+import com.bigowl.web.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

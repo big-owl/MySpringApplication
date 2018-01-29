@@ -1,6 +1,6 @@
-package com.instructure.talent.service;
+package com.bigowl.service;
 
-import com.instructure.talent.user.UserDto;
+import com.bigowl.user.UserDto;
 
 public class UserService {
   UserDto userDto = new UserDto();

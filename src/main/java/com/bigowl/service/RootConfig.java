@@ -1,11 +1,11 @@
-package com.instructure.talent.service;
+package com.bigowl.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = {"com.instructure.talent.service"})
+@ComponentScan(basePackages = {"com.bigowl.service"})
 public class RootConfig {
   @Bean
   UserService getUserService() {

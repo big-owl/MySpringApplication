@@ -1,4 +1,4 @@
-package com.instructure.talent.user;
+package com.bigowl.user;
 
 import java.io.Serializable;
 

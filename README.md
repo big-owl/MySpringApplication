@@ -7,7 +7,7 @@ using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.
 ## Getting Started
 1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
 2. Either run [http://localhost:8080/application](http://localhost:8080/application) from the
-browser, or run 'Application.main()' from your IDE.
+browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
 - Migrate application to Java 9.

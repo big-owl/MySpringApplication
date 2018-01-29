@@ -1,4 +1,4 @@
-package com.instructure.talent.web;
+package com.bigowl.web;
 
 import static org.junit.Assert.assertEquals;
 

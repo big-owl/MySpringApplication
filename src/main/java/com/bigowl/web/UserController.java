@@ -1,6 +1,6 @@
-package com.instructure.talent.web;
+package com.bigowl.web;
 
-import com.instructure.talent.service.UserService;
+import com.bigowl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
