@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.bigowl.web", "com.bigowl.config"})
+@ComponentScan(basePackages = {"com.bigowl.web", "com.bigowl.config", "com.bigowl.controller"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 }

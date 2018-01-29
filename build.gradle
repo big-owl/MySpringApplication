@@ -39,5 +39,3 @@ tomcat {
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
     contextPath  = 'application'
 }
-
-mainClassName = 'com.instructure.talent.Application'

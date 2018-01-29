@@ -1,4 +1,4 @@
-package com.bigowl.web;
+package com.bigowl.controller;
 
 import com.bigowl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
