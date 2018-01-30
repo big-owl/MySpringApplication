@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class UserController {
@@ -17,12 +18,8 @@ public class UserController {
   UserService userService = new UserService();
 
   @GetMapping("/")
-  public String welcome() {
-    String msg = "Welcome to MySpringApplication<br>"
-        +"<br>"
-        + "Get User Name - <a href=/application/get/name>/get/name</a><br>"
-        + "Get User Name By Id - <a href=/application/get/999/name>/get/{id}/name</a><br>";
-    return msg;
+  public ModelAndView home() {
+    return new ModelAndView("/index.html");
   }
 
   @GetMapping("/get/name")
