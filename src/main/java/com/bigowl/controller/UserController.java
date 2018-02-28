@@ -19,7 +19,12 @@ public class UserController {
 
   @GetMapping("/")
   public ModelAndView home() {
-    return new ModelAndView("/index.html");
+    return new ModelAndView("/index.jsp");
+  }
+
+  @GetMapping("/test")
+  public ModelAndView test() {
+    return new ModelAndView("/test.jsp");
   }
 
   @GetMapping("/get/name")

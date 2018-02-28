@@ -14,9 +14,14 @@ browser, or run 'ClientTest' from your IDE.
 - Migrate application to Java 9.
 - Add an in-memory database, like H2.
 
+## Considerations
+- Standard Spring MVC project structure seems to be that the view directory is under the 
+WEB-INF directory.  This enforces good habits (like MVC), but it prevents you from accessing
+the page directly.
+
 ## Known Issues
-- I wanted to develop this application using Spring Annotation Configuration (no xml configuration), but the
-'tomcatRun' gradle task would not work (returned a 404 message) until I added a .../main/webapp/WEB-INF/web.xml file.  
+- I wanted my default home page to be an html file (index.html), but I kept getting 404 errors.  Either no mapping could 
+be found, or I was unable to get the ViewResolver to ignore the html files. 
 
 ## References
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)  
