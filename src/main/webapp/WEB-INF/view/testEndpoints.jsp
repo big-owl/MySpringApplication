@@ -14,14 +14,18 @@
         <table>
             <tr>
                 <td><form:label path="name">Name</form:label></td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="name" />
+
             </tr>
             <tr>
                 <td><form:label path="id">Id</form:label></td>
-                <td><form:input path="id" /></td>
+                <td><form:input path="id" />
             </tr>
             <tr>
                 <td><input type="submit" value="Submit"/></td>
+            </tr>
+            <tr>
+                <font color="red">${errorMessage}</font>
             </tr>
         </table>
     </form:form>

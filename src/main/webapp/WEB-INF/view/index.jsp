@@ -10,6 +10,9 @@ This application is my attempt to develop a simple web application with a "backe
 using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.
 <br>
 <br>
+<a href="/application/user">User View</a>
+<br>
+<br>
 <a href="/application/test">Test REST endpoints page</a>
 </body>
 </html>

@@ -10,7 +10,8 @@ using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.
 browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
-- Update welcome (default view) page.
+- Improve input validation and error handling.
+- Improve unit testing.
 - Migrate application to Java 9.
 - Add an in-memory database, like H2.
 

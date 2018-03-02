@@ -2,17 +2,18 @@ package com.bigowl.web;
 
 import static org.junit.Assert.assertEquals;
 
-import org.springframework.web.client.RestTemplate;
+import com.bigowl.user.UserDto;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
+import org.springframework.web.client.RestTemplate;
 
 public class ClientTest {
 
   @Test
   // Test RESTful service PUT and GET endpoints.
-  public void testClient() {
+  public void testPut() {
     RestTemplate restTemplate = new RestTemplate();
     String id = "999";    // default
     String returnedName;
@@ -27,4 +28,6 @@ public class ClientTest {
     returnedName = restTemplate.getForObject("http://localhost:8080/application/get/" + id + "/name", String.class);
     assertEquals(returnedName, expectedName);
   }
+
+  // TODO: write unit test for POST endpoint.
 }
