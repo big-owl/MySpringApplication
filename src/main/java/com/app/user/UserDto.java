@@ -1,4 +1,4 @@
-package com.bigowl.user;
+package com.app.user;
 
 import java.io.Serializable;
 
