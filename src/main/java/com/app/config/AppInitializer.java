@@ -1,7 +1,7 @@
-package com.bigowl.config;
+package com.app.config;
 
-import com.bigowl.service.RootConfig;
-import com.bigowl.web.WebConfig;
+import com.app.service.RootConfig;
+import com.app.web.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
