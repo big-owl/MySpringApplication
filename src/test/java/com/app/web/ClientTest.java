@@ -1,8 +1,6 @@
-package com.bigowl.web;
+package com.app.web;
 
 import static org.junit.Assert.assertEquals;
-
-import com.bigowl.user.UserDto;
 
 import java.util.HashMap;
 import java.util.Map;
