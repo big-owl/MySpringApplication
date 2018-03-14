@@ -1,6 +1,6 @@
-package com.bigowl.controller;
+package com.app.controller;
 
-import com.bigowl.user.UserDto;
+import com.app.user.UserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
