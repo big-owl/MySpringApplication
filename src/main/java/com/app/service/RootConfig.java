@@ -1,6 +1,6 @@
-package com.bigowl.service;
+package com.app.service;
 
-import com.bigowl.user.UserDto;
+import com.app.user.UserDto;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
