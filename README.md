@@ -11,7 +11,7 @@ browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
 - Improve input validation and error handling.
-- Improve unit testing.
+- Improve unit testing using MockMvc.
 - Migrate application to Java 9.
 - Add an in-memory database, like H2.
 
