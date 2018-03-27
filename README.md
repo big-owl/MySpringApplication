@@ -2,7 +2,7 @@
 
 ## Description
 This project is my attempt to develop a simple web application with a "backend service" 
-using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.  
+using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, and Tomcat.  
 
 ## Getting Started
 1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
@@ -12,7 +12,6 @@ browser, or run 'ClientTest' from your IDE.
 ## Next Steps
 - Improve input validation and error handling.
 - Improve unit testing using MockMvc.
-- Migrate application to Java 9.
 - Add an in-memory database, like H2.
 
 ## Considerations
