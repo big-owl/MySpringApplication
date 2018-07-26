@@ -10,8 +10,11 @@ using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, and Tomcat.
 browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
-- Improve input validation and error handling.
+- Add logging (SLF4J and Logback).
 - Improve unit testing using MockMvc.
+- Upgrade to Java 9.
+- Upgrade to Spring Boot.
+- Upgrade to JUnit 5.
 - Add an in-memory database, like H2.
 
 ## Considerations
@@ -26,5 +29,6 @@ be found, or I was unable to get the ViewResolver to ignore the html files.
 ## References
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)  
 [Spring4 Restful Example](https://github.com/viralpatel/spring4-restful-example)  
-[Spring4 Annotation Configuration](http://javacodeimpl.blogspot.com/2017/02/spring-4-annotation-configuration.html)  
+[Spring4 Annotation Configuration](http://javacodeimpl.blogspot.com/2017/02/spring-4-annotation-configuration.html)
+[Spring Validation Example](https://www.journaldev.com/2668/spring-validation-example-mvc-validator)  
 

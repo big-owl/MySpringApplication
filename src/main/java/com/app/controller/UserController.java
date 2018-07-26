@@ -3,16 +3,20 @@ package com.app.controller;
 import com.app.user.UserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -25,9 +29,14 @@ public class UserController {
     this.user = user;
   }
 
-  // TODO: Field Injection is not recommended
-  //@Autowired
-  //UserDto user = new UserDto();
+  @Autowired
+  @Qualifier("userFormValidator")
+  private Validator validator;
+
+  @InitBinder
+  private void initBinder(WebDataBinder binder) {
+    binder.setValidator(validator);
+  }
 
   @GetMapping("/")
   public ModelAndView home() {

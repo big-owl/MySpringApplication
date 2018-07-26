@@ -26,6 +26,7 @@ dependencies {
     compile("org.springframework:spring-web:${springVersion}")
     compile("org.springframework:spring-webmvc:${springVersion}")
     compile("javax.servlet:javax.servlet-api:3.1.0")
+    compile("javax.validation:validation-api:2.0.0.Final")
     compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
 
     compile('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1') {
@@ -43,3 +44,6 @@ tomcat {
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
     contextPath  = 'application'
 }
+
+// The application plugin needs to know the main class for when it bundles the application.
+mainClassName = 'com.app.client.Application'
