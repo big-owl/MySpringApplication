@@ -28,7 +28,7 @@ be found, or I was unable to get the ViewResolver to ignore the html files.
 
 ## References
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)<br/>
-[Spring4 Restful Example](https://github.com/viralpatel/spring4-restful-example)<br/>  
+[Spring4 Restful Example](https://github.com/viralpatel/spring4-restful-example)<br/>
 [Spring4 Annotation Configuration](http://javacodeimpl.blogspot.com/2017/02/spring-4-annotation-configuration.html)<br/>
 [Spring Validation Example](https://www.journaldev.com/2668/spring-validation-example-mvc-validator)<br/>
 [Slf4J Example](http://makble.com/gradle-slf4j-integration-example-with-eclipse)<br/>
