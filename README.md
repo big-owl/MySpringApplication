@@ -2,7 +2,7 @@
 
 ## Description
 This project is my attempt to develop a simple web application with a "backend service" 
-using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, and Tomcat.  
+using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.  
 
 ## Getting Started
 1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
@@ -10,9 +10,9 @@ using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, and Tomcat.
 browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
-- Add logging (SLF4J and Logback).
 - Improve unit testing using MockMvc.
 - Upgrade to Java 9.
+- Modularize services.
 - Upgrade to Spring Boot.
 - Upgrade to JUnit 5.
 - Add an in-memory database, like H2.
@@ -30,5 +30,7 @@ be found, or I was unable to get the ViewResolver to ignore the html files.
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)  
 [Spring4 Restful Example](https://github.com/viralpatel/spring4-restful-example)  
 [Spring4 Annotation Configuration](http://javacodeimpl.blogspot.com/2017/02/spring-4-annotation-configuration.html)
-[Spring Validation Example](https://www.journaldev.com/2668/spring-validation-example-mvc-validator)  
+[Spring Validation Example](https://www.journaldev.com/2668/spring-validation-example-mvc-validator)
+[Slf4J Example](http://makble.com/gradle-slf4j-integration-example-with-eclipse)
+  
 

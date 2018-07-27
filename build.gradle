@@ -13,6 +13,7 @@ apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
 
 ext {
+  logbackVersion = '1.2.3'
   springVersion = '4.3.13.RELEASE'
   tomcatVersion = '8.5.24'
 }
@@ -22,18 +23,29 @@ repositories {
 }
 
 dependencies {
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
+    compile("ch.qos.logback:logback-core:${logbackVersion}")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
+    compile("javax.servlet:javax.servlet-api:3.1.0")
+    compile("javax.validation:validation-api:2.0.0.Final")
+    // Spring uses jakarta commons logging (jcl), so we need to use the jcl-over-slf4j bridge
+    // to make spring think it's using jcl.
+    compile("org.slf4j:jcl-over-slf4j:1.7.25")
+    compile("org.slf4j:slf4j-api:1.7.25")
     compile("org.springframework:spring-core:${springVersion}")
     compile("org.springframework:spring-web:${springVersion}")
     compile("org.springframework:spring-webmvc:${springVersion}")
-    compile("javax.servlet:javax.servlet-api:3.1.0")
-    compile("javax.validation:validation-api:2.0.0.Final")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
 
     compile('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1') {
         transitive = false
     }
 
+    configurations.all {
+        exclude group: "commons-logging", module: "commons-logging"
+    }
+
     testCompile 'junit:junit:4.12'
+    testCompile'org.slf4j:jcl-over-slf4j:1.7.25'
 
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
