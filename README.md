@@ -11,7 +11,6 @@ browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
 - Improve unit testing using MockMvc.
-- Upgrade to Java 9.
 - Modularize services.
 - Upgrade to Spring Boot.
 - Upgrade to JUnit 5.
