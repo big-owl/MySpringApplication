@@ -16,11 +16,10 @@
 </head>
 <body>
     <H1>REST Endpoints Test Page</H1><br>
-    Get User Name - <a href=/application/get/name>/get/name</a><br>
-    Get User Name By Id - <a href=/application/get/${id}/name>/get/${id}/name</a>
+    Get User Name By Id - <a href=/application/user/${id}/name>/user/${id}/name</a>
     <br>
     <br>
-    <form:form method="POST" action="/application/update" modelAttribute="user">
+    <form:form method="POST" action="/application/user/update" modelAttribute="user">
         <table>
             <tr>
                 <td colspan=3><span class="red">${errorMessage}</span></td>

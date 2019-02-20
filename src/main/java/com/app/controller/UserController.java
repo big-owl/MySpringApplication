@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.user.UserDto;
+import com.app.user.UserList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +26,8 @@ public class UserController {
   private UserDto user;
 
   @Autowired
-  public UserController(UserDto user) {
-    this.user = user;
+  public UserController() {
+    this.user = new UserDto();
   }
 
   @Autowired
@@ -58,7 +59,21 @@ public class UserController {
     return modelAndView;
   }
 
-  @PostMapping("/update")
+  @GetMapping("/users")
+  public @ResponseBody ResponseEntity<UserList> getUsers() {
+    UserList users = new UserList();
+    users.addUser(user);
+    return new ResponseEntity<UserList>(users, HttpStatus.OK);
+  }
+
+  @GetMapping("/user/{id}/name")
+  public @ResponseBody ResponseEntity<String> getById(@PathVariable long id) {
+    String name = user.getName(id);
+    return new ResponseEntity<String>(name, HttpStatus.OK);
+  }
+
+  // TODO: Update this logic to add a new DTO object, if the id is unique.
+  @PostMapping("/user/update")
   public ModelAndView submit(@ModelAttribute("user") UserDto user, BindingResult result) {
     ModelAndView modelAndView;
     if (result.hasErrors()) {
@@ -75,20 +90,8 @@ public class UserController {
     return modelAndView;
   }
 
-  @GetMapping("/get/name")
-  public @ResponseBody ResponseEntity<String> get() {
-    String name = user.getName();
-    return new ResponseEntity<String>(name, HttpStatus.OK);
-  }
-
-  @GetMapping("/get/{id}/name")
-  public @ResponseBody ResponseEntity<String> getById(@PathVariable long id) {
-    String name = user.getName(id);
-    return new ResponseEntity<String>(name, HttpStatus.OK);
-  }
-
-  @PutMapping("/put/{id}/{name}")
-  public @ResponseBody ResponseEntity<String> post(@PathVariable long id, @PathVariable String name) {
+  @PutMapping("/user/{id}/{name}")
+  public @ResponseBody ResponseEntity<String> updateName(@PathVariable long id, @PathVariable String name) {
     HttpStatus status = HttpStatus.NOT_MODIFIED;    // default
     if (user.setName(id, name)) {
       status = HttpStatus.OK;

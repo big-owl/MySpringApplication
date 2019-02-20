@@ -45,4 +45,8 @@ public class UserDto implements Serializable {
       return false;
     }
   }
+
+  public String toString() {
+    return "id = " + id + "\n" + "name = " + name;
+  }
 }

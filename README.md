@@ -2,7 +2,7 @@
 
 ## Description
 This project is my attempt to develop a simple web application with a "backend service" 
-using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.  
+using Spring 5, JUnit 5, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.  
 
 ## Getting Started
 1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
@@ -10,10 +10,10 @@ using Spring 4, JUnit 4, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.
 browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
-- Improve unit testing using MockMvc.
+- Improve unit testing using MockMvc and/or MockRestServiceServer.
+- Replace hard-coded values with dependency injection.
 - Modularize services.
 - Upgrade to Spring Boot.
-- Upgrade to JUnit 5.
 - Add an in-memory database, like H2.
 
 ## Considerations
@@ -24,6 +24,8 @@ the page directly.
 ## Known Issues
 - I wanted my default home page to be an html file (index.html), but I kept getting 404 errors.  Either no mapping could 
 be found, or I was unable to get the ViewResolver to ignore the html files. 
+- The application must be running (tomcatRun) before the "unit tests" can be started.  Otherwise, you will get a 
+"connection refused" message.  This also throws off the test coverage metrics.
 
 ## References
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)<br/>

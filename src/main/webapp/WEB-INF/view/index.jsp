@@ -7,7 +7,7 @@
 <body>
 <H1>Welcome to MySpringApplication</H1><br>
 This application is my attempt to develop a simple web application with a "backend service"
-using Spring 4, JUnit 4, Java 8, RestTemplate, Gradle, and Tomcat.
+using Spring 5, JUnit 5, Java 9, RestTemplate, Gradle, and Tomcat.
 <br>
 <br>
 <a href="/application/user">User View</a>
