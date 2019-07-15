@@ -45,12 +45,20 @@ dependencies {
     exclude group: "commons-logging", module: "commons-logging"
   }
 
-//  testCompile 'junit:junit:4.12'
-  testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.4.0'
+  testImplementation 'org.hamcrest:hamcrest:2.1'
+  
   testCompile 'org.slf4j:jcl-over-slf4j:1.7.25'
-
+  
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
       "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+test {
+  useJUnitPlatform()
+  testLogging{
+    events "passed", "skipped", "failed"
+  }
 }
 
 tomcat {

@@ -9,14 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,7 +65,6 @@ public class UserController {
     return new ResponseEntity<String>(name, HttpStatus.OK);
   }
 
-  // TODO: Update this logic to add a new DTO object, if the id is unique.
   @PostMapping("/user/update")
   public ModelAndView submit(@ModelAttribute("user") UserDto user, BindingResult result) {
     ModelAndView modelAndView;

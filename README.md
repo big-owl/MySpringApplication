@@ -10,7 +10,7 @@ using Spring 5, JUnit 5, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.
 browser, or run 'ClientTest' from your IDE.
 
 ## Next Steps
-- Improve unit testing using MockMvc and/or MockRestServiceServer.
+- Improve unit testing using MockMvc.
 - Replace hard-coded values with dependency injection.
 - Modularize services.
 - Upgrade to Spring Boot.
@@ -33,5 +33,6 @@ be found, or I was unable to get the ViewResolver to ignore the html files.
 [Spring4 Annotation Configuration](http://javacodeimpl.blogspot.com/2017/02/spring-4-annotation-configuration.html)<br/>
 [Spring Validation Example](https://www.journaldev.com/2668/spring-validation-example-mvc-validator)<br/>
 [Slf4J Example](http://makble.com/gradle-slf4j-integration-example-with-eclipse)<br/>
+[JUnit 5 with Gradle](https://github.com/junit-team/junit5-samples/blob/r5.4.0/junit5-jupiter-starter-gradle/build.gradle)<br/>
   
 
