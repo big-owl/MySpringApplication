@@ -34,6 +34,12 @@ browser, or run 'ClientTest' from your IDE.
 - Both URLs below work the same. But the first option is the standard convention and what users expect.
     - http://localhost:8080/application/ → serves index.html (cleaner, preferred)
     - http://localhost:8080/application/index.html → also serves index.html (explicit)
+- If you get an error during "git push" stating "Your push would publish a private email address.", then try this:
+    - Find your GitHub noreply address in your GitHub's Personal Settings --> Emails.
+    - git config user.email ""
+    - git config user email {ID}+{username}@users.noreply.github.com
+    - git commit --amend --reset-author
+    - git push
 
 ## Known Issues
 - My controller should be stateless.
