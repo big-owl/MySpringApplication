@@ -4,3 +4,6 @@
 MySpringApplication.iml
 build/
 out/
+.vscode/
+CLAUDE.md
+

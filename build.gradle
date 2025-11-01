@@ -1,9 +1,11 @@
 buildscript {
   repositories {
-    mavenCentral()
+      mavenCentral()
+      gradlePluginPortal()
   }
   dependencies {
-    classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
+      //classpath 'com.bmuschko:gradle-tomcat-plugin:2.7.0'
+      classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
   }
 }
 
@@ -11,6 +13,11 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 
 ext {
   logbackVersion = '1.2.3'
@@ -65,6 +72,10 @@ tomcat {
   httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
   ajpProtocol = 'org.apache.coyote.ajp.AjpNio2Protocol'
   contextPath = 'application'
+}
+
+tomcatRun {
+    daemon = true   // start Tomcat in the background
 }
 
 // The application plugin needs to know the main class for when it bundles the application.

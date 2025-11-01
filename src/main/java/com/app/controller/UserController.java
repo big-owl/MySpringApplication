@@ -39,10 +39,11 @@ public class UserController {
     binder.setValidator(validator);
   }
 
-  @GetMapping("/")
-  public ModelAndView home() {
-    return new ModelAndView("index");
-  }
+  // Removed "/" mapping - now served by static index.html
+  // @GetMapping("/")
+  // public ModelAndView home() {
+  //   return new ModelAndView("index");
+  // }
 
   @GetMapping("/test")
   public ModelAndView test() {

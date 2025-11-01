@@ -2,28 +2,41 @@
 
 ## Description
 This project is my attempt to develop a simple web application with a "backend service" 
-using Spring 5, JUnit 5, Java 9, RestTemplate, Gradle, SLF4J and Tomcat.  
+using Spring 5, JUnit 5, Java 8, RestTemplate, Gradle, SLF4J and Tomcat.  
+
+## Setup
+1. Install sdkman - https://sdkman.io/install/.
+2. You must have Java 8 installed.
+- To see which Java version is currently active in your shell: "sdk current java". 
+- If not java 8, then you can run: "sdk use java 8.0.462-amzn".
+3. You must have Gradle 4.9 installed. 
+- To verify, run "gradle -v"
+- If gradle 4.9 is not running, then you can run: "sdk install gradle 4.9" and then "sdk use gradle 4.9".
+4. Clone this repository. 
+- First navigate to the desired directory. Then run: "git clone https://github.com/big-owl/MySpringApplication.git"
 
 ## Getting Started
-1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance, and deploy to it.
+1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance (running in the background), and deploy to it. 
+- For example: "gradle tomcatRun".
 2. Either run [http://localhost:8080/application](http://localhost:8080/application) from the
 browser, or run 'ClientTest' from your IDE.
+3. To stop the tomcat instance, run "gradle --stop".
 
 ## Next Steps
+- Upgrade Java, Gradle, and Spring versions.
 - Improve unit testing using MockMvc.
 - Replace hard-coded values with dependency injection.
 - Modularize services.
 - Upgrade to Spring Boot.
 - Add an in-memory database, like H2.
 
-## Considerations
-- Standard Spring MVC project structure seems to be that the view directory is under the 
-WEB-INF directory.  This enforces good habits (like MVC), but it prevents you from accessing
-the page directly.
+## Notes
+- Both URLs below work the same. But the first option is the standard convention and what users expect.
+    - http://localhost:8080/application/ → serves index.html (cleaner, preferred)
+    - http://localhost:8080/application/index.html → also serves index.html (explicit)
 
 ## Known Issues
-- I wanted my default home page to be an html file (index.html), but I kept getting 404 errors.  Either no mapping could 
-be found, or I was unable to get the ViewResolver to ignore the html files. 
+- My controller should be stateless.
 - The application must be running (tomcatRun) before the "unit tests" can be started.  Otherwise, you will get a 
 "connection refused" message.  This also throws off the test coverage metrics.
 
