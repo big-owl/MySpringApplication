@@ -23,6 +23,8 @@ browser, or run 'ClientTest' from your IDE.
 3. To stop the tomcat instance, run "gradle --stop".
 
 ## Next Steps
+- Figure out how to auto configure target JVM version.
+- Resolve Gradle 5.0 incompatible warning.
 - Upgrade Java, Gradle, and Spring versions.
 - Improve unit testing using MockMvc.
 - Replace hard-coded values with dependency injection.
@@ -42,7 +44,6 @@ browser, or run 'ClientTest' from your IDE.
     - git push
 
 ## Known Issues
-- My controller should be stateless.
 - The application must be running (tomcatRun) before the "unit tests" can be started.  Otherwise, you will get a 
 "connection refused" message.  This also throws off the test coverage metrics.
 

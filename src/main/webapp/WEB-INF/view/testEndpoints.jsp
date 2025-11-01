@@ -15,9 +15,7 @@
     </style>
 </head>
 <body>
-    <H1>REST Endpoints Test Page</H1><br>
-    Get User Name By Id - <a href=/application/user/${id}/name>/user/${id}/name</a>
-    <br>
+    <H1>REST Endpoints Test Page</H1>
     <br>
     <form:form method="POST" action="/application/user/update" modelAttribute="user">
         <table>
@@ -40,5 +38,8 @@
             </tr>
         </table>
     </form:form>
+    <br>
+    Get User Name By Id - <a href=/application/user/${id}/name>/user/${id}/name</a>
+    <br>
 </body>
 </html>

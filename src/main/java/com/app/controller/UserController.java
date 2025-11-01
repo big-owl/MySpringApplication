@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import com.app.service.UserService;
+
 import com.app.user.UserDto;
 import com.app.user.UserList;
 
@@ -9,26 +11,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class UserController {
 
-  private UserDto user;
+  private final UserService userService;
 
   @Autowired
-  public UserController() {
-    this.user = new UserDto();
+  public UserController(UserService userService) {
+      this.userService = userService;
   }
+
 
   @Autowired
   @Qualifier("userFormValidator")
@@ -39,21 +35,30 @@ public class UserController {
     binder.setValidator(validator);
   }
 
-  // Removed "/" mapping - now served by static index.html
-  // @GetMapping("/")
-  // public ModelAndView home() {
-  //   return new ModelAndView("index");
-  // }
+  @GetMapping("/")
+  public ModelAndView home() {
+    return new ModelAndView("index");
+  }
 
+  // Usage: Access as /test?id=1
   @GetMapping("/test")
-  public ModelAndView test() {
+  public ModelAndView test(@RequestParam long id) {
+    UserDto user = userService.getUser(id);
+    if (user == null) {
+      user = new UserDto();  // Or handle with error page
+    }
     ModelAndView modelAndView = new ModelAndView("testEndpoints", "user", user);
     modelAndView.addObject("id", user.getId());
     return modelAndView;
   }
 
+  // Usage: Access as /user?id=1
   @GetMapping("/user")
-  public ModelAndView user() {
+  public ModelAndView user(@RequestParam long id) {
+    UserDto user = userService.getUser(id);
+    if (user == null) {
+      user = new UserDto();  // Or handle with error page
+    }
     ModelAndView modelAndView = new ModelAndView("userView");
     modelAndView.addObject("name", user.getName());
     modelAndView.addObject("id", user.getId());
@@ -62,13 +67,16 @@ public class UserController {
 
   @GetMapping("/users")
   public @ResponseBody ResponseEntity<UserList> getUsers() {
-    UserList users = new UserList();
-    users.addUser(user);
+    UserList users = userService.getAllUsers();
     return new ResponseEntity<UserList>(users, HttpStatus.OK);
   }
 
   @GetMapping("/user/{id}/name")
   public @ResponseBody ResponseEntity<String> getById(@PathVariable long id) {
+    UserDto user = userService.getUser(id);
+    if (user == null) {
+      return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
+    }
     String name = user.getName(id);
     return new ResponseEntity<String>(name, HttpStatus.OK);
   }
@@ -82,7 +90,7 @@ public class UserController {
       modelAndView.addObject("errorMessage", "invalid input");
     }
     else {
-      this.user = user;
+      userService.saveUser(user);  // Save to service instead of this.user
       modelAndView = new ModelAndView("userView");
       modelAndView.addObject("name", user.getName());
       modelAndView.addObject("id", user.getId());
@@ -92,10 +100,8 @@ public class UserController {
 
   @PutMapping("/user/{id}/{name}")
   public @ResponseBody ResponseEntity<String> updateName(@PathVariable long id, @PathVariable String name) {
-    HttpStatus status = HttpStatus.NOT_MODIFIED;    // default
-    if (user.setName(id, name)) {
-      status = HttpStatus.OK;
-    }
+    boolean updated = userService.updateUserName(id, name);
+    HttpStatus status = updated ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
     return new ResponseEntity<String>("PUT Response", status);
   }
 }

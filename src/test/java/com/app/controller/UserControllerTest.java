@@ -1,8 +1,12 @@
 package com.app.controller;
 
 import com.app.user.UserDto;
+import com.app.user.UserList;
+import com.app.service.UserService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -13,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -23,11 +29,14 @@ public class UserControllerTest {
 
   private MockMvc mockMvc;
   private UserDto user;
+  private UserService userService;
 
   @BeforeEach
   public void setup() {
-    this.mockMvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
     this.user = new UserDto();
+    this.userService = Mockito.mock(UserService.class);
+    UserController controller = new UserController(userService);
+    this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
   }
 
   @Test
@@ -41,7 +50,9 @@ public class UserControllerTest {
 
   @Test
   public void testEndpointsPage() throws Exception {
-    this.mockMvc.perform(get("/test"))
+    when(userService.getUser(anyLong())).thenReturn(user);
+
+    this.mockMvc.perform(get("/test").param("id", String.valueOf(user.getId())))
         .andExpect(status().isOk())
         .andExpect(view().name("testEndpoints"))
         .andExpect(model().attribute("id", user.getId()))
@@ -50,7 +61,9 @@ public class UserControllerTest {
 
   @Test
   public void testUserViewPage() throws Exception {
-    this.mockMvc.perform(get("/user"))
+    when(userService.getUser(anyLong())).thenReturn(user);
+
+    this.mockMvc.perform(get("/user").param("id", String.valueOf(user.getId())))
         .andExpect(status().isOk())
         .andExpect(view().name("userView"))
         .andExpect(model().attribute("name", user.getName()))
@@ -60,6 +73,10 @@ public class UserControllerTest {
 
   @Test
   public void testGetUsers() throws Exception {
+    UserList userList = new UserList();
+    userList.addUser(user);
+    when(userService.getAllUsers()).thenReturn(userList);
+
     MvcResult result = this.mockMvc.perform(get("/users"))
         .andExpect(status().isOk())
         .andReturn();
@@ -74,19 +91,21 @@ public class UserControllerTest {
     String name;
     String expected;
 
+    when(userService.getUser(user.getId())).thenReturn(user);
     result = this.mockMvc.perform(get("/user/" + user.getId() + "/name"))
-        .andExpect(status().isOk())
-        .andReturn();
+             .andExpect(status().isOk())
+             .andReturn();
     name = result.getResponse().getContentAsString();
     expected = user.getName();
     assertTrue(name.equals(expected));
 
     //user with id 0 should not exist
+    when(userService.getUser(0L)).thenReturn(null);
     result = this.mockMvc.perform(get("/user/0/name"))
-        .andExpect(status().isOk())
-        .andReturn();
+             .andExpect(status().isNotFound())
+             .andReturn();
     name = result.getResponse().getContentAsString();
-    expected = "unknown";
+    expected = "User not found";
     assertTrue(name.equals(expected));
   }
 
@@ -107,5 +126,20 @@ public class UserControllerTest {
     model = result.getModelAndView().getModel();
     String errorMessage = model.get("errorMessage").toString();
     assertTrue(errorMessage.equals("invalid input"));
+  }
+
+  @Test
+  public void testSubmitSuccess() throws Exception {
+    MvcResult result = this.mockMvc.perform(post("/user/update")
+        .param("id","123")
+        .param("name", "Glenn")
+        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(view().name("userView"))
+        .andReturn();
+
+    // Verify the service was called
+    Mockito.verify(userService).saveUser(Mockito.any(UserDto.class));
   }
 }
