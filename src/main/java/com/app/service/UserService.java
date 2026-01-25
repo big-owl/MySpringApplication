@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class UserService {
+    // Note: ConcurrentHashMap does not allow duplicate keys.
     private final Map<Long, UserDto> users = new ConcurrentHashMap<>();
 
     public UserDto getUser(long id) {
@@ -21,15 +22,25 @@ public class UserService {
     }
 
     public void saveUser(UserDto user) {
+        // Note: if user with same id exists, it will be replaced.
         users.put(user.getId(), user);
     }
 
-    public boolean updateUserName(long id, String name) {
+    public void updateUserName(long id, String name) {
         UserDto user = users.get(id);
         if (user != null) {
-            return user.setName(id, name);
+            // user id exists, update the name
+            user.setName(name);
+            // save updated user
+            saveUser(user);
         }
-        return false;
+        else {
+            // user does not exist, so add new user
+            user = new UserDto();
+            user.setId(id);
+            user.setName(name);
+            saveUser(user);
+        }
     }
 }
 

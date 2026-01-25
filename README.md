@@ -2,34 +2,46 @@
 
 ## Description
 This project is my attempt to develop a simple web application with a "backend service" 
-using Spring 5, JUnit 5, Java 8, RestTemplate, Gradle, SLF4J and Tomcat.  
+using Spring Boot 3.3.6, Java 17, Gradle 9.3.0, and Tomcat 10.1.33.
 
 ## Setup
 1. Install sdkman - https://sdkman.io/install/.
-2. You must have Java 8 installed.
+2. You should have Java 17 installed.
 - To see which Java version is currently active in your shell: "sdk current java". 
-- If not java 8, then you can run: "sdk use java 8.0.462-amzn".
-3. You must have Gradle 4.9 installed. 
+- If not java 17, then you can run: "sdk use java 17.0.6-amzn".
+3. You should have Gradle 9.3.0 installed. 
 - To verify, run "gradle -v"
-- If gradle 4.9 is not running, then you can run: "sdk install gradle 4.9" and then "sdk use gradle 4.9".
+- If gradle 9.3.0 is not running, then you can run: "sdk install gradle 9.3.0" and then "sdk use gradle 9.3.0".
 4. Clone this repository. 
 - First navigate to the desired directory. Then run: "git clone https://github.com/big-owl/MySpringApplication.git"
 
 ## Getting Started
-1. Use 'tomcatRun' or 'tomcatRunWar' gradle task to start a tomcat instance (running in the background), and deploy to it. 
-- For example: "gradle tomcatRun".
+1. Use the 'bootRun' gradle task to start a tomcat instance (running in the background), and deploy to it. 
+- For example: "gradle bootRun".
 2. Either run [http://localhost:8080/application](http://localhost:8080/application) from the
 browser, or run 'ClientTest' from your IDE.
-3. To stop the tomcat instance, run "gradle --stop".
+3. To stop the tomcat instance, press 'Ctrl + C' in the terminal window where 'bootRun' is running.
+
+## How to Use
+
+Run unit tests only (no server required):
+> gradle test
+
+Run full build (no server required):
+> gradle build
+
+Run integration tests (server must be running):  
+// Terminal 1  
+> gradlew bootRun
+
+// Terminal 2  
+> gradle integrationTest
 
 ## Next Steps
-- Figure out how to auto configure target JVM version.
-- Resolve Gradle 5.0 incompatible warning.
+- Improve the user entry & store functionality.
+- Improve the API user documentation.
 - Upgrade Java, Gradle, and Spring versions.
 - Improve unit testing using MockMvc.
-- Replace hard-coded values with dependency injection.
-- Modularize services.
-- Upgrade to Spring Boot.
 - Add an in-memory database, like H2.
 
 ## Notes
@@ -44,8 +56,7 @@ browser, or run 'ClientTest' from your IDE.
     - git push
 
 ## Known Issues
-- The application must be running (tomcatRun) before the "unit tests" can be started.  Otherwise, you will get a 
-"connection refused" message.  This also throws off the test coverage metrics.
+- None at this time.
 
 ## References
 [Gradle Tomcat Plugin](https://github.com/bmuschko/gradle-tomcat-plugin)<br/>

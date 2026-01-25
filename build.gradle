@@ -1,28 +1,19 @@
-buildscript {
-  repositories {
-      mavenCentral()
-      gradlePluginPortal()
-  }
-  dependencies {
-      //classpath 'com.bmuschko:gradle-tomcat-plugin:2.7.0'
-      classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
-  }
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '3.3.6'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'war'
-apply plugin: 'com.bmuschko.tomcat'
-
-compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+// Set Java 17 for compilation and runtime (required for Spring Boot 3)
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 ext {
-  logbackVersion = '1.2.3'
-  springVersion = '5.1.5.RELEASE'
-  tomcatVersion = '9.0.16'
+  // Spring Boot manages dependency versions
 }
 
 repositories {
@@ -30,39 +21,37 @@ repositories {
 }
 
 dependencies {
-  compile("ch.qos.logback:logback-classic:${logbackVersion}")
-  compile("ch.qos.logback:logback-core:${logbackVersion}")
-  compile("com.fasterxml.jackson.core:jackson-databind:2.9.8")
-  compile("javax.servlet:javax.servlet-api:3.1.0")
-  compile("javax.validation:validation-api:2.0.1.Final")
-  // Spring uses jakarta commons logging (jcl), so we need to use the jcl-over-slf4j bridge
-  // to make spring think it's using jcl.
-  compile("org.slf4j:jcl-over-slf4j:1.7.25")
-  compile("org.slf4j:slf4j-api:1.7.25")
-  compile("org.springframework:spring-core:${springVersion}")
-  compile("org.springframework:spring-web:${springVersion}")
-  compile("org.springframework:spring-webmvc:${springVersion}")
-  compile("org.springframework:spring-test:${springVersion}")
+  // Spring Boot starters include all necessary dependencies
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-  compile('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2') {
-    transitive = false
-  }
+  // JSP support (Spring Boot 3 uses jakarta)
+  implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+  implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
-  configurations.all {
-    exclude group: "commons-logging", module: "commons-logging"
-  }
+  // Validation
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-  testImplementation 'org.junit.jupiter:junit-jupiter:5.4.0'
-  testImplementation 'org.hamcrest:hamcrest:2.1'
-  testImplementation 'org.mockito:mockito-core:3.12.4'
-  testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
-
-  testCompile 'org.slf4j:jcl-over-slf4j:1.7.25'
-  
-  tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-      "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+  // Test dependencies
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+// Configure integration test source set
+sourceSets {
+  integrationTest {
+    java {
+      srcDir 'src/integrationTest/java'
+    }
+    resources {
+      srcDir 'src/integrationTest/resources'
+    }
+    compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+    runtimeClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+  }
+}
+
+// Standard unit tests (excludes integration tests)
 test {
   useJUnitPlatform()
   testLogging {
@@ -70,15 +59,23 @@ test {
   }
 }
 
-tomcat {
-  httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
-  ajpProtocol = 'org.apache.coyote.ajp.AjpNio2Protocol'
-  contextPath = 'application'
+// Integration tests task (requires server to be running)
+task integrationTest(type: Test) {
+  description = 'Runs integration tests (requires application server to be running)'
+  group = 'verification'
+
+  testClassesDirs = sourceSets.integrationTest.output.classesDirs
+  classpath = sourceSets.integrationTest.runtimeClasspath
+
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+
+  shouldRunAfter test
 }
 
-tomcatRun {
-    daemon = true   // start Tomcat in the background
+// Spring Boot configuration
+springBoot {
+    mainClass = 'com.app.Application'
 }
-
-// The application plugin needs to know the main class for when it bundles the application.
-mainClassName = 'com.app.client.Application'

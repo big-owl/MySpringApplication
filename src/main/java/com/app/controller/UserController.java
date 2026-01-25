@@ -25,7 +25,6 @@ public class UserController {
       this.userService = userService;
   }
 
-
   @Autowired
   @Qualifier("userFormValidator")
   private Validator validator;
@@ -40,22 +39,10 @@ public class UserController {
     return new ModelAndView("index");
   }
 
-  // Usage: Access as /test?id=1
-  @GetMapping("/test")
-  public ModelAndView test(@RequestParam long id) {
-    UserDto user = userService.getUser(id);
-    if (user == null) {
-      user = new UserDto();  // Or handle with error page
-    }
-    ModelAndView modelAndView = new ModelAndView("testEndpoints", "user", user);
-    modelAndView.addObject("id", user.getId());
-    return modelAndView;
-  }
-
   // Usage: Access as /user?id=1
   @GetMapping("/user")
-  public ModelAndView user(@RequestParam long id) {
-    UserDto user = userService.getUser(id);
+  public ModelAndView user(@RequestParam(defaultValue = "0") long id) {
+      UserDto user = userService.getUser(id);
     if (user == null) {
       user = new UserDto();  // Or handle with error page
     }
@@ -77,7 +64,7 @@ public class UserController {
     if (user == null) {
       return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
     }
-    String name = user.getName(id);
+    String name = user.getName();
     return new ResponseEntity<String>(name, HttpStatus.OK);
   }
 
@@ -100,8 +87,20 @@ public class UserController {
 
   @PutMapping("/user/{id}/{name}")
   public @ResponseBody ResponseEntity<String> updateName(@PathVariable long id, @PathVariable String name) {
-    boolean updated = userService.updateUserName(id, name);
-    HttpStatus status = updated ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
+    userService.updateUserName(id, name);
+    HttpStatus status = HttpStatus.OK;
     return new ResponseEntity<String>("PUT Response", status);
+  }
+
+  // Usage: Access as /test?id=1
+  @GetMapping("/test")
+  public ModelAndView test(@RequestParam(defaultValue = "0") long id) {
+    UserDto user = userService.getUser(id);
+    if (user == null) {
+      user = new UserDto();  // Or handle with error page
+    }
+    ModelAndView modelAndView = new ModelAndView("testEndpoints", "user", user);
+    modelAndView.addObject("id", user.getId());
+    return modelAndView;
   }
 }

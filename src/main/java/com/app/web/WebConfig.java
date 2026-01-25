@@ -11,19 +11,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan(basePackages = {"com.app.config", "com.app.controller", "com.app.web", "com.app.validator"})
 public class WebConfig implements WebMvcConfigurer {
 
-  // Only handles JSP files
-  @Bean
-  public ViewResolver jspViewResolver() {
-    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setViewClass(JstlView.class);
-    resolver.setPrefix("/WEB-INF/view/");
-    resolver.setSuffix(".jsp");
-    return resolver;
-  }
+  // ViewResolver is configured in application.properties
+  // No need for @EnableWebMvc - Spring Boot auto-configures MVC
 
   // Configure static resource handling, in order to serve static HTML files.
   @Override

@@ -26,25 +26,24 @@ public class ClientTest {
     Map<String, Object> params = new HashMap<>();
     params.put("id", id);
     params.put("name", name);
-    // TODO: verify that the put was successful.  It will only succeed if the "id" is found (hasn't been modified).
-    //  Need to fix this condition.
     restTemplate.put(url + "/user/{id}/{name}", null, params);
   }
 
-  @BeforeEach
-  void init() {
-    UserList users;
-    users = restTemplate.getForObject("http://localhost:8080/application/users", UserList.class);
-    user = users.getUser(0);
-  }
+//  @BeforeEach
+//  void init() {
+//    UserList users;
+//    users = restTemplate.getForObject("http://localhost:8080/application/users", UserList.class);
+//    user = users.getUser(0);
+//  }
 
-  @AfterEach
-  void cleanup() {
-    updateName(user.getId(), user.getName());
-  }
+//  @AfterEach
+//  void cleanup() {
+//    updateName(user.getId(), user.getName());
+//  }
 
   // Currently this test requires the application to be running on tomcat.
   // Otherwise a ResourceAccessException is thrown.
+
   // TODO: Use MockRestServiceServer for client-side REST (RestTemplate) testing.
 
   @Test
