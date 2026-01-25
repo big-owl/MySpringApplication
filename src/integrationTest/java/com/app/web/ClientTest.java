@@ -29,17 +29,13 @@ public class ClientTest {
     restTemplate.put(url + "/user/{id}/{name}", null, params);
   }
 
-//  @BeforeEach
-//  void init() {
-//    UserList users;
-//    users = restTemplate.getForObject("http://localhost:8080/application/users", UserList.class);
-//    user = users.getUser(0);
-//  }
+  @BeforeEach
+  void init() {
+  }
 
-//  @AfterEach
-//  void cleanup() {
-//    updateName(user.getId(), user.getName());
-//  }
+  @AfterEach
+  void cleanup() {
+  }
 
   // Currently this test requires the application to be running on tomcat.
   // Otherwise a ResourceAccessException is thrown.
