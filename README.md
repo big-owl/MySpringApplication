@@ -40,6 +40,9 @@ Run integration tests (server must be running):
 ## Next Steps
 - Improve the user entry & store functionality.
 - Improve the API user documentation.
+- Add Spring Security (authentication + CSRF protection).
+- Add logging functionality using Slf4J + Logback.
+- Add integration tests using Testcontainers.
 - Upgrade Java, Gradle, and Spring versions.
 - Improve unit testing using MockMvc.
 - Add an in-memory database, like H2.
