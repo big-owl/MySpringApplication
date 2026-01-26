@@ -23,14 +23,14 @@
                 <td colspan=3><span class="red">${errorMessage}</span></td>
             </tr>
             <tr>
-                <td><form:label path="name">Name</form:label></td>
-                <td><form:input path="name" />
-                <td><form:errors path="name" cssClass="error"/></td>
-            </tr>
-            <tr>
                 <td><form:label path="id">Id</form:label></td>
                 <td><form:input path="id" type="number"/>
                 <td><form:errors path="id" cssClass="error"/></td>
+            </tr>
+            <tr>
+                <td><form:label path="name">Name</form:label></td>
+                <td><form:input path="name" />
+                <td><form:errors path="name" cssClass="error"/></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
