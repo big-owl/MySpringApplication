@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,7 +45,6 @@ public class UserControllerTest {
     this.mockMvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(view().name("index"))
-        //.andDo(MockMvcResultHandlers.print())
         .andReturn();
   }
 
@@ -82,7 +82,7 @@ public class UserControllerTest {
         .andReturn();
     String content = result.getResponse().getContentAsString();
     String expected = "{\"users\":[{\"id\":" + user.getId() + ",\"name\":\"" + user.getName() + "\"}]}";
-    assertTrue(content.equals(expected));
+    assertEquals(expected, content);
   }
 
   @Test

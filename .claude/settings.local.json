@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew dependencyInsight:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(./gradlew dependencies:*)"
+    ]
+  }
+}

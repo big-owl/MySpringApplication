@@ -7,7 +7,6 @@ import org.springframework.validation.Validator;
 import com.app.user.UserDto;
 
 @Component("userFormValidator")
-//@Component
 public class UserFormValidator implements Validator {
 
   //which objects can be validated by this validator
