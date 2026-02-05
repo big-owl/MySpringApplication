@@ -59,8 +59,8 @@ Run integration tests (server must be running):
 
 ## Known Issues
 - There appears to be a bug with Gradle that causes it to think there is a JVM version mismatch (running Java 25 with 
-- Java 17-compiled libraries). This JVM version attribute mistmatch causes Gradle to exclude spring-web from the
-- dependency tree.
+Java 17-compiled libraries). This JVM version attribute mismatch causes Gradle to exclude spring-web from the
+dependency tree.
 
   
 
